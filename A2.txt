@@ -1,0 +1,19 @@
+1. Create Java Project, Package and Class name as Process.
+
+2. To remove errors
+Project -> build path -> add external archives -> File system -> usr -> lib -> Hadoop
+-> Hadoop-common jar 
+Project -> build path -> add external archives -> File system -> usr -> lib -> Hadoopmapreduce -> Hadoop-core-2.6.0
+
+3. In terminal type the following command
+->pwd
+->ls
+-> hadoop fs -put Desktop/Process.txt Process.txt
+
+4. Create jar file
+Process.Java file -> export -> jar file -> browse -> Cloudera -> rename to Process.jar -> ok ->
+finish
+
+5. Go to terminal
+-> hadoop jar Process.jar Process.Process Process.txt dir16
+-> hadoop fs -cat dir16/part-r-00000

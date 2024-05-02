@@ -1,0 +1,57 @@
+-> hive
+
+-> create database mydb2;
+
+-> use mydb2
+
+-> create table flight(fno int, year int, dest varchar(10), delay float);
+ 
+-> alter table flight rename to air_flight
+
+-> alter table air_flight add columns(source varchar(10));
+
+-> desc air_flight
+
+-> drop table flight
+
+-> create table flight(fno int, year int, dest varchar(10), delay float)
+ > row format delimited
+ > fields terminated by ','
+ > lines terminated by '\n'
+ > stored as textfile;
+
+-> insert into flight values(123,2009,"mumbai",30.6);
+
+-> select * from flight;
+
+//To insert file
+1. create file in another terminal by :
+-> gedit f.txt
+
+2.Type records in format
+
+3. Go to hive terminal
+
+-> load data local inpath "f.txt"
+ > overwrite into table flight;
+
+// for join
+-> create table nflight(fno int, year int, source varchar(10))
+ > row format delimited
+ > fields terminated by ','
+ > lines terminated by '\n'
+ > stored as textfile;
+
+-> insert into nflight values(123,2009,"pune");
+
+-> select a.fno, a.year, a.dest, a.delay, b.source
+ > from flight a join nflight b
+ > on(a.fno=b.fno);
+
+//to crate index
+-> crate index flight_index on table flight(fno)
+ > as 'org.apache.hadoop.hive.ql.index.compact.CompactIndexHandler'
+ > WITH DEFERRED REBUILD;
+
+-> show tables;
+
